@@ -1,204 +1,216 @@
 Nama : Mochammad Wahyu Suryansyah
 NPM  : 2206083142
 Kelas: PBP E
+Kode Asdos: LKS
 
-Tautan menuju aplikasi Adaptablle: https://bookshop.adaptable.app/
+1. Apa perbedaan antara form POST dan form GET dalam Django?
 
-SOAL 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    POST
+    - Metode POST digunakan untuk mengirim data ke server dengan tujuan membuat, mengubah, atau menghapus data di server. Biasanya juga digunakan untuk mengirim data yang akan dimasukkan ke dalam basis data atau sebagai tindakan yang akan mengubah status server.
+    - Data yang dikirm biasanya data sensitif seperti kata sandi karena saat dikirim dalam badan permintaan HTTP, data tidak terlihat oleh pengguna.
+    - Tidak ada batasan ukuran data yang dapat dikirim.
 
-    CHECKLIST 1. Membuat sebuah proyek Django baru.
-        Pertama-tama, kita perlu membuat repository baru terlebih dauhulu pada Github.
-        Lalu kita juga membuat direktori baru pada direktori lokal dan melakukan inisiasi git dengan "git init"
-        Dilanjutkan dengan konfigurasi nama dan surel dengan :  git config user.name "<NAME>" & it config user.    email "<EMAIL>"
-        Begitu juga dengan konfigurasi global : git config --global user.name "<NAME>" & git config --global user email "<EMAIL>"
-        Dilanjutkan verifikasi konfigurasi dengan : git config --list --local
-        Setelah itu, kita perlu ,enghubungkan repositori lokal dengan repositori di GitHub dengan :git branch -M main & git remote add origin <URL_REPO>
+    GET
+    - Metode GET digunakan untuk mengambil data dari server di mana kita hanya ingin mendapatkan data dari server tanpa mempengaruhi status atau data di server.
+    - Data yang dikrim dapat dilihat oleh pengguna di mana data dikirim sebagai bagian dari URL. 
+    - Ada batasan panjang URL yang dapat berbeda-beda tergantung pada server dan browser.
 
-        Selanjutnya, kita perlu melakukan instalasi Django yakni mengaktifkan vitrual environment pada direktori lokal yang sudha kita buat tadi dengan : python -m venv env
-        Lalu kita katifkan virtual environment tadi dengan env\Scripts\activate.bat
-        Lalu, kita juga perlu menyiapkan dependencies dengan membuat bverkas requirements.txt yang berisi:
-            django
-            gunicorn
-            whitenoise
-            psycopg2-binary
-            requests
-            urllib3
-        dan kita pasang dengan : pip install -r requirements.txt
-        Lalu kkta buat proyek Django dengan django-admin startproject shopping_list .
+2. Apa perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data?
 
-        Selanjutnya, kita mengkonfigutrasi proyek dengan menabhakan * pada ALLOWED_HOSTS di settings.py 
-        Lalu untuk menjalanakan server kta dapat menjalankan perintah pada shell di direktori lokal denhan : python manage.py runserver
-        Tidak lupa kita juga pelru membuat .gitignore
-        Lalu kita push dengan : git add ., git commit -m "pesan", dan git push -u origin main
+    XML
+    - XML merepresentasikan data dalam pola pohon
+    - XML mendukung semua tipe data JSON dan tipe-tipe tambahan, seperti Boolean, tanggal, citra, dan namespace. 
+    - Digunakan untuk mendefinisikan struktur data dengan tag-tag yang dapat disesuaikan di mana kitadapat membuat format data sendiri sesuai dengan kebutuhan.
+    - Biasanya digunakan untuk pertukaran data antar sistem dan penyimpanan data terstruktur.
+    - Kurang efisien untuk penggunaan data yang besar karena memiliki overhead dalam hal ukuran file yang disebabkan oleh tag-tagnya yang lengkap. 
+    - Parsing XML memerlukan upaya lebih daripada format lain seperti JSON.
 
-    CHECKLIST 2. Membuat aplikasi dengan nama main pada proyek tersebut.
-        Pertama kita perlu  mengaktifkan virtual environment pada direktori lokal yang telah kita baut tadi dengan env\Scripts\activate.bat
-        Lalu baru kita dapat membuat aplikasi  main dengan perintah :python manage.py startapp main
+    JSON
+    - JSON merepresentasikan data menggunakan pasangan kunci-nilai. 
+    - JSON mendukung angka, objek, string, dan array Boolean.
+    - struktur data yang lebih sederhana dibandingkan dengan XML di mana terdiri dari pasangan nama-nilai yang disusun dalam objek dan larik.
+    - Biasanya digunakan secara luas dalam pengembangan web dan pertukaran data antara aplikasi web dan server. 
 
-    CHECKLIST 3. Melakukan routing pada proyek agar dapat menjalankan aplikasi main.
-        Kita perlu mengubah urls.py pada direktori proyek kita dengan menambah:
-        from django.urls import path, include
-        urlpatterns = [
-            ...
-            path('main/', include('main.urls')),
-            ...
-        ]
+    HTML
+    - digunakan untuk menggambarkan struktur dokumen web yang terdiri dari elemen-elemen seperti tag, atribut, dan teks.
+    - Biasanya digunakan untuk membuat halaman web dan menampilkan data kepada pengguna melalui peramban web. 
+    - Tidak digunakan untuk pertukaran data antar sistem atau penyimpanan data terstruktur seperti XML atau JSON.
+    
+3. Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
 
-    CHECKLIST 4. Membuat model pada aplikasi main dengan nama Item 
-                Kita perlu mengubah models.py pada direktori main dengan:
-                from django.db import models
+    - Format data JSON ringkas dan mudah dibaca oleh manusia. Strukturnya berupa pasangan nama-nilai yang berfungsi seperti objek dan larik dalam JavaScript. Keterbacaan yang baik membuatnya ideal untuk debugging dan pengujian.
+    - JSON memungkinkan untuk pengambilan data parsial dalam aplikasi web modern yang berbasis JavaScript. Hal ini berarti kitacdapat memuat hanya bagian-bagian data yang diperlukan dari server sehingga mengurangi beban lalu lintas dan waktu pengunduhan.
+    - JSON dapat digunakan dengan mudah di berbagai bahasa pemrograman karena banyak bahasa memiliki dukungan untuk memparsing JSON. Hal ini memungkinkan aplikasi yang berjalan di berbagai platform dan bahasa berkomunikasi dengan mudah.
+    - JSON adalah bagian dari JavaScript, hampir semua peramban web modern memiliki dukungan bawaan untuk memparsing JSON. Hal ini tentu memudahkan komunikasi antara peramban web dan server.
+    - Format JSON yang ringan di mana format JSON biasanya memiliki ukuran yang lebih kecil dibandingkan dengan format lain seperti XML. Hal ini tentu mengurangi beban lalu lintas dan waktu yang diperlukan untuk mentransmisikan data.
 
-                class Product(models.Model):
-                    name = models.CharField(max_length=255) #name sebagai nama item dengan tipe CharField.
-                    amount = models.IntegerField()          #amount sebagai jumlah item dengan tipe IntegerField.
-                    description = models.TextField()      #description sebagai deskripsi item dengan tipe TextField.
-                Tidak lupa kita juga pelru melakukan migrasi model dnegan : python manage.py makemigrations dan python manage.py migrate
+4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    Checklist 1. Membuat input form untuk menambahkan objek model pada app sebelumnya.
+        - Mengatur Routing dari main/ ke /
+          Sebelumnya, kita perlu mengaktifkan virtual environment terlebih dahulu dengan: env\Scripts\activate.bat
+          Lalu, kita Bbuka urls.py yang ada pada folder wahyus_shop dan mengubah path main/ menjadi '' pada urlpatterns
+        - Implementasi Skeleton sebagai Kerangka Views
+          Kita buat folder templates pada root folder yang berisi sebuah berkas HTML baru bernama base.html dengan kode berikit:
+                {% load static %}
+                    <!DOCTYPE html>
+                    <html lang="en">
+                        <head>
+                            <meta charset="UTF-8" />
+                            <meta
+                                name="viewport"
+                                content="width=device-width, initial-scale=1.0"
+                            />
+                            {% block meta %}
+                        </head>
 
-    CHECKLIST 5. Membuat sebuah fungsi pada views.py untuk dikembalikan ke dalam sebuah template HTML yang menampilkan nama aplikasi serta nama dan kelas kamu.
-        Pertama kita perlu mengubah berkas views.py pada drektori main dengan :
+                        <body>
+                            {% block content %}
+                            {% endblock content %}
+                        </body>
+                    </html>
+
+          Lalu kita tambahkan kode: 'DIRS': [BASE_DIR / 'templates'], pada settings.py di subdirektori wahyus_shop
+            
+        - Membuat Form Input Data dan Menampilkan Data Produk Pada HTML
+            Pertama, kita buat berkas baru pada direktori main dengan nama forms.py untuk membuat struktur form yang dapat menerima data produk baru, yang berisi kode berikut:
+                    from django.forms import ModelForm
+                    from main.models import Product
+                    class ProductForm(ModelForm):
+                        class Meta:
+                            model = Product
+                            fields = ["name", "price", "description"]
+
+            Lalu kita import: from django.http import HttpResponseRedirect, from main.forms import ProductForm, from django.urls import reverse pada views.py di main
+            Selanjutnya, kita buat fungsi baru dengan nama create_product dengan kode berikut:
+                def create_product(request):
+                    form = ProductForm(request.POST or None)
+
+                    if form.is_valid() and request.method == "POST":
+                        form.save()
+                        return HttpResponseRedirect(reverse('main:show_main'))
+
+                    context = {'form': form}
+                    return render(request, "create_product.html", context)
+
+            Kita juga perlu mengubah fungsi show_main pada views.py menjadi:
                 def show_main(request):
-            context = {
-                
-                'name': 'Nama',
-                'class': 'Kelas'
-            }
-            return render(request, "main.html", context)
+                    products = Product.objects.all()
 
-    CHECKLIST 6. Membuat sebuah routing pada urls.py aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py.
-        Pertama kita perlu membuat beerkas urls.py pada direktori main dengan kode berikut:
-        from django.urls import path
-        from main.views import show_main
-        from django.urls import path, include
+                    context = {
+                        'name': 'Pak Bepe', # Nama kamu
+                        'class': 'PBP A', # Kelas PBP kamu
+                        'products': products
+                    }
+                    return render(request, "main.html", context)
 
-        app_name = 'main'
+            Tidak lupa kita harus mengimport fungsi create_product yang sudah dibuat tadi dengan: from main.views import show_main, create_product pada urls.py pada main
 
-        urlpatterns = [
-            path('', show_main, name='show_main'),
-            path('main/', include('main.urls')),
+            Tambahkan path url ke dalam urlpatterns pada urls.py di main path('create-product', create_product, name='create_product'),
+            Buat berkas HTML baru dengan nama create_product.html pada direktori main/templates
+                {% extends 'base.html' %} 
 
-        ]
+                {% block content %}
+                <h1>Add New Product</h1>
 
-    CHECKLIST 7. Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses 
-        Pertama, kita perlu menghubungkan Adaptable.io dengan GitHub dan pilih All Repositories pada proses instalasi.
-        Pilih repositori proyek yang telah kita buat sebagai basis aplikasi yang akan di-deploy. lalu pilih branch main
-        Pada proyek ini kita pilih Python App Template sebagai template deployment dan PostgreSQL sebagai tipe basis data yang akan digunakan.
-        Untuk versi Python perlu disesuaikan dengan spesifikasi aplikasi masing-masing
-        Pada bagian Start Command kita pelru memasukkan perintah python manage.py migrate && gunicorn nama_proyek.wsgi.
-        Lalu masukkan nama aplikasi yang juga akan menjadi nama domain situs web aplikasi di mana saya menggunakan nama bookshop
-        Centang bagian HTTP Listener on PORT dan klik Deploy App untuk memulai proses deployment aplikasi.
-        Maka kita tinggal menunggu web selesai dideploy
+                <form method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table }}
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Add Product"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                {% endblock %}
+
+            Menambahkan kode berikut pada main.html 
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Date Added</th>
+                    </tr>
+
+                    {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
+
+                    {% for product in products %}
+                        <tr>
+                            <td>{{product.name}}</td>
+                            <td>{{product.price}}</td>
+                            <td>{{product.description}}</td>
+                            <td>{{product.date_added}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <br />
+
+                <a href="{% url 'main:create_product' %}">
+                    <button>
+                        Add New Product
+                    </button>
+                </a>
+
+                {% endblock content %}
+
+    Checklist 2. Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+
+        XML
+        - Pertama, kita buka views.py yang ada pada folder main dan tambahkan import HttpResponse dan Serializer pada bagian paling atas.
+            from django.http import HttpResponse
+            from django.core import serializers
+        - Lalu, kita buat sebuah fungsi yang menerima parameter request dengan nama show_xml dan buatlah sebuah variabel di dalam fungsi tersebut yang menyimpan hasil query dari seluruh data yang ada pada Product.
+            def show_xml(request):
+                data = Product.objects.all()
+                return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        - Buka urls.py yang ada pada folder main dan import fungsi yang sudah kita buat tadi.
+            from main.views import show_main, create_product, show_xml 
+
+        JSON
+        - Pertama, kita buat sebuah fungsi baru yang menerima parameter request dengan nama show_json pada views.py pada main
+            def show_json(request):
+                data = Product.objects.all()
+                return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+        -  Lalu kita import fungsi yang sudah kamu buat tadi pada urls/py di main
+            from main.views import show_main, create_product, show_xml, show_json
+        
+        XML dan JSON by id
+         - Pertama, kita buka views.py yang ada pada folder main dan buatlah sebuah fungsi baru yang menerima parameter request dan id dengan nama show_xml_by_id dan show_json_by_id.
+        XML
+        def show_xml_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+        JSON
+        def show_json_by_id(request, id):
+            data = Product.objects.filter(pk=id)
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
     
-    CHECKLIST 8. Membuat sebuah README.md yang berisi tautan menuju aplikasi Adaptable yang sudah di-deploy
-        Untuk membuat readme dapat kita lakuakn dengan visual studio code
-        Lalu pada folder kita klik new dile dan memberi nama README.md dan kita isi sesuai yang diinginkan
+    Checklist 3. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin 2
+        XML
+        - Kita hanya perlu menambah path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+            ...
+            path('xml/', show_xml, name='show_xml'), 
+            ...
+        JSON
+        - Kita hanya perlu menambah path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+            ...
+            path('json/', show_json, name='show_json'), 
+            ...
+        XML dan JSON by id
+        - Kita hanya perlu menambah path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+            ...
+            path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+            path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
+            ...
 
+    Checklist 4. Menjawab beberapa pertanyaan berikut pada README.md pada root folder.
+       - Cukup mengedit file README.md yang sudah dibuat sebelumnya (pada tugas 2)
 
-SOAL 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
+5. Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
 
-                Client Request     ----->          Django        
-                    (HTTP Request)                Web Server    
-                                                                
-                                    |
-                                    |
-                                    v
-                                                
-                                Django View    
-                                (views.py)     
-                                                
-                                    |
-                                    |
-                                    v
-                                                
-                                Model Data     
-                                (models.py)   
-                                                
-                                    |
-                                    |
-                                    v
-                                                
-                                HTML Template  
-                                (HTML File)    
-                                                
-                                    |
-                                    |
-                                    v
-                                                
-                                Server Response 
-                                (HTTP Response) 
-                                                
-                                    |
-                                    |
-                                    v
-                                                
-                                Client Browser  
-
-    Penjelasan:
-
-    erkas models.py adalah tempat kita mendefinisikan model-data aplikasi kita. Model-data ini menggambarkan bagaimana data akan disimpan dan diorganisir dalam database. Setiap model dalam models.py mewakili tabel dalam database atau dokumen dalam basis data (pada kasus aplikasi web berbasis NoSQL). Model-data ini digunakan untuk mengelola data, termasuk menambah, mengubah, menghapus, dan mengambil data dari database.
-
-    Sedangkan views.py adalah tempat kita mendefinisikan logika aplikasi kita. Views mengatur bagaimana permintaan HTTP dari pengguna akan diproses. Mereka berinteraksi dengan model-data (dari models.py) untuk mengambil atau mengubah data, dan mereka menentukan apa yang harus ditampilkan kepada pengguna. Dalam banyak kasus, views juga berfungsi sebagai penghubung antara model dan template.
-
-    lalu urls.py berfungsi sebagai penghubung antara URL yang diterima oleh aplikasi kita dan views yang sesuai. Ini berisi daftar pola URL dan menentukan view yang harus dipanggil ketika URL tertentu diakses oleh pengguna. Oleh karena itu, urls.py mengatur navigasi di dalam aplikasi kita.
-
-    Dan HTML digunakan untuk merender tampilan yang akan ditampilkan kepada pengguna. Template HTML dapat mengambil data dari views dan model untuk menghasilkan tampilan yang dinamis. Template ini digunakan untuk mengatur tampilan halaman web kita, termasuk bagaimana data ditampilkan kepada pengguna.
-
-    Adapun aliran data umum dalam aplikasi web Django adalah sebagai berikut:
-
-        USer mengakses URL yang ditentukan dalam urls.py.
-
-        urls.py menghubungkan URL tersebut dengan view yang sesuai dalam views.py.
-
-        View dalam views.py mungkin akan berinteraksi dengan model-data dalam models.py untuk mengambil atau mengubah data dalam database.
-
-        Setelah data diperoleh, view akan menggunakan template HTML untuk merender tampilan yang akan dikirimkan kembali kepada pengguna.
-
-
-SOAL 3. Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
-
-    Dengan menggunakan virtual environment dapat memungkinkan kita untuk membuat development environment yang terisolasi. hal Ini memugnkinkan kita memiliki berbagai proyek dengan versi Python dan library yang berbeda. Tentunya,  pada etiap proyek memiliki environment sendiri-sendiri dan tidak memengaruhi satu satu sama lain. 
-    Di sinilah virtual environment berfungsi sehingga tidak ada konflik antar proyek di mana tiap proyek bisa saja memilii versi python dan library berbeda.
-
-    Lalu, mengenai pembuatan aplikasi web berbasis Django tanpa virtual envirronment sebenarnya masih memungkinkan. Kita dapat menginstall langsung Django secara global pada sistem lalu mengerjakan web tersebut langsung apda global envrionmentnya.
-
-SOAL 4. Jelaskan apakah itu MVC, MVT, MVVM dan perbedaan dari ketiganya.
-
-    MVC (Model View Controller)
-    Suatu model yang seringkali digunakan oleh para pengembang software. Terdapat beebrapa komponen di dalam arsiteuktur ini yaitu:
-
-        Model
-        Berisi tentang logika bisnis dan status data yang ada di dalam aplikasi. Komponen ini bertugas untuk mendapatkan dan memanipulasi data, berkomunikasi dengan controller, berinteraksi dengan database, terkadang memperbarui tampilan dari aplikasi yang dikembangkan.
-
-        View
-        Komponen ini berhubungan dengan antarmuka pengguna yang terdiri dari HTML/CSS.XML. Komponen ini berkomunikasi dengan pengontrol dan terkadang berinteraksi dengan model. View berkerja sama dengan controller untuk menciptakan tampilan dinamis pada aplikasi yang dikembangkan. Selain bertugas untuk menangani antarmuka dan interaksi pengguna, komponen view juga memiliki tugas untuk menyajikan data yang sesuai untuk pengguna.
-
-        Controller
-        Controller adalah suatu aktivitas/fragmen yang berfungsi sebagai komunikator antara view dan model. Komponen ini membutuhkan suatu input pengguna dari layanan view/REST. Lalu Permintaan “Get Data” diproses dari model dan diteruskan ke view untuk ditampilkan ke pengguna.
-    
-    MVT (Model-View-Template)
-    Sebuah konsep arsitektur yang digunakan dalam pengembangan web untuk memisahkan komponen-komponen utama dari sebuah aplikasi. Konsep ini memungkinkan pengembang web untuk mengorganisasi dan mengelola kode dengan lebih terstruktur.
-
-        Model
-        Bertanggung jawab untuk mengatur dan mengelola data dari aplikasi. Model mewakili struktur data dan logika aplikasi yang berada di belakang tampilan. Model menghubungkan aplikasi dengan basis data dan mengatur interaksi dengan data tersebut.
-
-        View
-        Berisi menangani logika presentasi dalam konsep MVT. View mengontrol bagaimana data yang dikelola oleh model akan ditampilkan kepada pengguna. Dalam konteks MVT, view berperan sebagai pengatur tampilan dan mengambil data dari model untuk disajikan kepada pengguna.
-
-        Template
-        Berfungsi untuk mengatur tampilan atau antarmuka pengguna. Template memisahkan kode HTML dari logika aplikasi. Dalam MVT, template digunakan untuk merancang tampilan yang akhirnya akan diisi dengan data dari model melalui view.
-
-    MVMM (Model View ViewModel )
-    Gabungan dari MVC dan MVP. MVVM awalnya digunakan di dalam Windows Presentation Foundation (WPF) dan Silverlight. Pola yang digunakan berdasarkan gabungan dari MVC dan MVP mencoba untuk lebih jelas dalam memisahkan pengembangan UI dari logika bisnis dan perilaku dalam aplikasi.
-
-        Model
-        Model yang digunakan untuk MVVM mirip dengan model yang digunakan MVC, dimana model tersebut terdiri dari data dasar yang digunakan untuk menjalankan perangkat lunak.
-
-        View
-        View digunakan sebagai antarmuka grafis antara pengguna dan pola desain, serta menampilkan output dari data yang telah diproses. View yang digunakan MVVM mirip dengan View yang digunakan dalam MVC.
-
-        ViewModel
-        ViewModel di satu sisi adalah abstraksi dari View, lalu di sisi yang lain, sebagai penyedia pembungkus data model untuk ditautkan. ViewModel terdiri dair Model yang diubah menjadi View, dan berisi perintah yang dapat digunakan oleh View untuk mempengaruhi Model.
-    
-    Perbedaan ketiganya:
-
-        MVC memiliki pengontrol yang menggerakkan Model dan Tampilan. MVT memiliki Tampilan untuk menerima permintaan HTTP dan mengembalikan respons HTTP. Pada MVVM user berinteraksi dengan tampilan secara langsung yang berfungsi dengan model tampilan. Jika ada perubahan, hal ini terjadi secara langsung antara model tampilan dan model itu sendiri. Selain itu, MVC Highly coupled, sedangkan MVT dan MVVM Loosely coupled.
-
+    https://drive.google.com/drive/folders/1OBfYmqePJFi1jWleWaUf_FM3UQxzxrLX?usp=sharing
