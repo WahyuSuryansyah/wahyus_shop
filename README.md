@@ -3,113 +3,132 @@ NPM  : 2206083142
 Kelas: PBP E
 Kode Asdos: LKS
 
-1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+Tugas 5
 
-    Django UserCreationForm adalah sebuah form bawaan (built-in form) yang disediakan oleh Django, sebuah kerangka kerja pengembangan web Python yang populer. Form ini digunakan untuk membuat formulir pendaftaran user dalam aplikasi web yang memungkinkan user untuk membuat akun baru. UserCreationForm menyederhanakan proses pembuatan akun user dengan mengelola validasi data input dan proses penyimpanan data pengguna ke dalam database.
+1. Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.
 
-    Kelebihan:
-
-        - UserCreationForm sangat mudah penggunaannya, kita dapat mengintegrasikannya dengan cepat dalam aplikasi kita tanpa perlu menulis kode validasi atau manipulasi data yang rumit.
-        - Form ini memiliki validasi bawaan yang kuat untuk memastikan bahwa data yang dimasukkan oleh user adalah valid dan aman. Hal ini membantu menghindari serangan siber. 
-        - UserCreationForm secara otomatis berinteraksi dengan model User yang sudah ada di Django, sehingga data pengguna baru akan disimpan di basis data dengan benar.
-
-    Kekurangan:
-
-        - Tidak memiliki field email sehingga tidak dapat melakukan verifikasi akun melalui email
-
-        - Jika kita memerlukan fitur otentikasi lanjutan seperti otentikasi dua faktor (2FA) atau integrasi dengan layanan pihak ketiga, kita perlu menambahkan fungsionalitas tersebut sendiri.
-
-2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
-
-    Autentikasi adalah proses memverifikasi identitas pengguna. Di dalam Django, autentikasi biasanya dilakukan saat pengguna mencoba untuk masuk ke dalam sistem dengan menyediakan kredensial seperti nama pengguna (username) dan kata sandi (password). Proses autentikasi tentu sangat penting dalam aplikasi web agar dapat memastikan bahwa hanya pengguna yang memiliki izin yang benar yang dapat mengakses sumber daya atau fitur tertentu dalam aplikasi kita. Hal ini membantu melindungi data dan mengidentifikasi pengguna secara sah.
-
-    Otorisasi adalah proses mengendalikan akses pengguna ke sumber daya atau fitur tertentu setelah mereka berhasil diautentikasi.  Di dalam Django, otorisasi sering kali diimplementasikan menggunakan sistem perizinan (permission system). Hal ini memungkinkan kita untuk mengatur izin atau hak akses yang spesifik untuk pengguna atau grup pengguna tertentu. Otorisasi cukup penting untuk memastikan bahwa pengguna hanya dapat melakukan tindakan yang sesuai dengan peran atau izin mereka dalam aplikasi. Hal ini membantu melindungi data sensitif dan mencegah pengguna yang tidak berwenang mengakses atau mengubah sumber daya.
-
-3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
-
-    Cookies adalah sepotong data kecil yang disimpan di sisi klien (browser) saat user mengunjungi sebuah situs web. Cookies digunakan dalam konteks aplikasi web untuk menyimpan informasi di sisi klien yang dapat digunakan oleh server web untuk mengenali user yang kembali ke situs tersebut. 
-
-    Django memiliki dukungan bawaan untuk mengelola cookies dan sesi user melalui modul django.contrib.sessions. Berikut adalah cara Django menggunakan cookies untuk mengelola data sesi user:
-
-    1.  Memulai Sesi user
-        Ketika seorang user pertama kali mengunjungi situs web Django, sesi user baru akan dimulai secara otomatis. Sebuah cookie khusus dengan ID sesi akan dibuat dan dikirimkan ke peramban user.
-        
-    2.  Menyimpan Data Sesi
-        Saat user melakukan interaksi dengan situs web (misalnya, masuk, menambahkan barang ke keranjang belanja, atau mengisi formulir), Django dapat digunakan untuk menyimpan data sesi user dalam bentuk dictionary Python. Data ini akan dikaitkan dengan ID sesi yang sesuai.
-    
-    3.  Mengirimkan Cookie Kembali
-        Setiap kali user membuat permintaan berikutnya ke situs web, web akan mengirimkan cookie sesi (berisi ID sesi) kembali ke server Django. Ini memungkinkan Django untuk mengidentifikasi sesi user yang sesuai.
-    
-    4.  Mengambil Data Sesi
-        Django akan mengambil ID sesi dari cookie, mencocokkannya dengan sesi yang sesuai di server, dan mengembalikan data sesi user ke dalam aplikasi.
-    
-    5.  Mengambil Data Sesi
-        Dapat menghapus atau mengubah data sesi user sesuai kebutuhan. Setelah user keluar atau sesi berakhir, data sesi dapat dihapus.
-
-4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
-
-    Penggunaan cookies dalam pengembangan web dapat menjadi alat yang berguna untuk menyimpan informasi pada sisi klien (browser) dan menjaga keadaan (state) aplikasi di seluruh sesi user. Namun, ada beberapa risiko potensial yang perlu diwaspadai terkait dengan penggunaan cookies.
-
-    - Cookies dapat digunakan untuk menyimpan data sensitif, seperti token otentikasi atau informasi pengguna lainnya. Jika tidak diimplementasikan dengan benar, data ini dapat terpapar jika cookies diretas oleh pihak yang tidak berwenang.
-
-    - Cookie Theft di mana Cookies yang tidak dienkripsi atau yang rentan terhadap serangan peretasan dapat dicuri oleh pihak yang tidak berwenang. Serangan pencurian cookies dapat memberikan akses kepada penyerang untuk mengakses akun pengguna yang terkait dengan cookies tersebut.
-
-    - Cross-Site Scripting (XSS)Serangan yaitu XSS dapat memungkinkan penyerang menyisipkan skrip berbahaya ke dalam halaman web yang akan dieksekusi oleh browser pengguna. Dalam konteks cookies, penyerang dapat mencuri cookies pengguna melalui serangan XSS dan menggunakannya untuk mengakses akun pengguna.
-
-    - Tracking Pengguna di mana Cookies juga digunakan oleh banyak situs web untuk melacak perilaku pengguna secara online. Beberapa pengguna mungkin menganggap ini sebagai pelanggaran privasi, terutama jika data yang dikumpulkan digunakan tanpa izin atau dengan cara yang tidak etis.
-
-5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
-
-    Checklist 1. Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
-
-        Registrasi
-        Pertama, kita perlu menjalankan virtual environement terlebih dauhulu. Lalu kita import redirect, UserCreationForm, dan messages pada bagian paling atas kode views.py. Berikutnya kita perlu membuat fungsi regostrasi unutk membuat formulir otomatis dan aku baru. Lalu kita membuat templates register.html untuk mengatur bagaimana tampilan halaman web registrasi kita. Tidak lupa kita juga perlu impor fungsi registrasi tadi pada urls.py dan menambahkan path nyab ke dalam urlpatterns.
-
-        Login dan Logout
-        Langkahnya sama sebagaimana dalam pembuatan reistrasi hanya saja kita meingpor from django.contrib.auth import authenticate, login dan from django.contrib.auth import logout pada views.py
-
-    Checklist 2. Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
-
-        [![1.png](https://i.postimg.cc/Bvt61N3R/1.png)](https://postimg.cc/5Hd1hB6m)
-        [![2.png](https://i.postimg.cc/pd7dQ8Xr/2.png)](https://postimg.cc/gwVdmxhb)
-
-    Checklist 3. Menghubungkan model Item dengan User.
-        Pertama, kita perlu mengimpor from django.contrib.auth.models import User pada models.py dan menambahkan potongan kode berikut:
-
-        class Product(models.Model):
-            user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    Checklist 4. Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
-
-        Pertama, kita tambahkan import HttpResponseRedirect, reverse, dan datetime pada bagian paling atas pada views.py dengan kode berikut:
-        import datetime
-        from django.http import HttpResponseRedirect
-        from django.urls import reverse
-
-        Selanjutnya kita mengganti kode yang ada pada blok if user is not None menjadi potongan kode berikut.
-        if user is not None:
-            login(request, user)
-            response = HttpResponseRedirect(reverse("main:show_main")) 
-            response.set_cookie('last_login', str(datetime.datetime.now()))
-            return response
-
-        Pada fungsi show_main, kita tambahkan potongan kode 'last_login': request.COOKIES['last_login'] ke dalam variabel context
-        context = {
-            'name': 'Pak Bepe',
-            'class': 'PBP A',
-            'products': products,
-            'last_login': request.COOKIES['last_login'],
+    1. p {} Mengubah gaya semua teks pada elemen <p> menjadi warna merah
+        p {
+            ...
         }
 
+    2. div {} Mengatur margin dan padding untuk semua elemen <div>
+    div {
+        ...
+    }
 
-        Ubah fungsi logout_user menjadi seperti potongan kode berikut.
-        def logout_user(request):
-            logout(request)
-            response = HttpResponseRedirect(reverse('main:login'))
-            response.delete_cookie('last_login')
-            return response
+    3. h2 {} Mengubah ukuran font untuk semua elemen <h2> menjadi lebih besar
+    h2 {
+        ...
+    }
 
-        Lalu agar last login dapat ditampilkan pada web kita, kita tambahkan potongan kode berikut di antara tabel dan tombol logout pada main.html.
+    4. a{} Mengubah gaya semua elemen <a> (link) untuk membuat teks menjadi tebal (bold) dan memberikan warna biru:
+    a {
+        ..
+    }
 
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
-      
+    5. img {} Mengatur batas tepi (border) untuk semua elemen <img>
+    img {
+        ...
+    }
+
+    6. ul {} Mengubah gaya semua elemen <ul> (daftar tak terurut) untuk menghilangkan tanda bulatan (bullet) dan memberikan margin kiri
+    ul {
+        ...
+    }
+
+    7. strong {} Mengubah font tebal (bold) untuk semua elemen <strong> (teks tebal)
+    strong {
+        ...
+    }
+
+2. Jelaskan HTML5 Tag yang kamu ketahui.
+
+    1. <header> Digunakan untuk mendefinisikan bagian atas atau kepala dari sebuah halaman atau bagian.
+
+    2. <nav> Menandakan bagian yang berisi navigasi atau menu utama situs web.
+
+    3. <main> Menunjukkan konten utama dari halaman web, yang biasanya berada di antara <header> dan <footer>.
+
+    4. <article> Mengelompokkan konten independen yang dapat berdiri sendiri, seperti berita atau postingan blog.
+
+    5. <section> Membagi konten menjadi bagian-bagian yang lebih kecil dan memiliki arti atau makna tertentu.
+
+    6. <aside> Digunakan untuk konten tambahan yang berhubungan dengan konten utama, seperti sidebar atau iklan.
+
+    7. <footer> Menunjukkan bagian bawah dari halaman atau bagian, biasanya berisi informasi tambahan seperti hak cipta atau tautan ke halaman terkait.
+
+    8. <figure> dan <figcaption> <figure> digunakan untuk mengelompokkan konten multimedia, seperti gambar atau video
+
+    9. <figcaption> digunakan untuk memberikan keterangan atau deskripsi tentang konten multimedia tersebut.
+
+    10. <video> dan <audio> Digunakan untuk menyisipkan dan mengontrol video dan audio di halaman web.
+
+    11. <canvas> Memungkinkan pembuatan gambar dan grafik menggunakan JavaScript.
+
+    12. <form> Digunakan untuk membuat formulir interaktif yang memungkinkan pengguna untuk mengirim data ke server.
+
+    13. <input> Membuat elemen input seperti teks, kata sandi, checkbox, radio button, dan lainnya dalam formulir.
+
+    14. <textarea>  Membuat area teks yang lebih besar yang memungkinkan pengguna untuk memasukkan teks panjang.
+
+    15. <button>  Membuat tombol yang dapat digunakan untuk tindakan interaktif, seperti mengirimkan formulir atau menjalankan fungsi JavaScript.
+
+    16. <datalist>  Digunakan bersamaan dengan elemen input untuk menyajikan pilihan atau daftar autentikasi kepada pengguna.
+
+    17. <progress>  Menunjukkan kemajuan atau status dalam operasi jangka panjang, seperti pengunggahan file atau pemrosesan data.
+
+    18. <details> dan <summary> Digunakan untuk membuat elemen yang dapat diperluas atau disusutkan oleh pengguna dengan mengeklik <summary>.
+
+    19. <mark> Digunakan untuk menyorot atau menandai teks dalam konten.
+
+    20. <time>  Menandakan waktu atau tanggal dalam teks.
+
+    21. <meter> Digunakan untuk menunjukkan skala atau rentang nilai numerik, seperti rating atau suhu.
+
+   22.  <abbr> dan <acronym> Digunakan untuk menggambarkan singkatan atau akronim dan memberikan informasi tambahan saat pengguna mengarahkan kursor ke atasnya.
+
+    23. <iframe> Digunakan untuk menyisipkan halaman web atau konten dari situs web lain ke dalam halaman web saat ini.
+
+3. Jelaskan perbedaan antara margin dan padding.
+    1. Margin
+    Margin adalah ruang di sekitar elemen, di luar batas elemen tersebut. Biasanya, margin digunakan untuk memberikan jarak antara elemen dengan elemen lainnya di sekitarnya. Selain itu, margin tidak memiliki latar belakang atau warna. Lalu, margin tidak mempengaruhi ukuran atau bentuk elemen itu sendiri, tetapi mempengaruhi jarak antara elemen dan elemen-elemen lain di sekitarnya.
+    
+    2. Padding
+    Sementara padding adalah ruang di dalam elemen, di antara konten elemen dan batas elemen. Biasanya, padding digunakan untuk memberikan ruang di sekitar konten elemen, terpisah dari batas elemen. Selain itu, padding dapat memiliki latar belakang atau warna, sehingga dapat mengubah tampilan latar belakang elemen di dalam padding. Lalu, padding juga mempengaruhi ukuran dan bentuk elemen, karena itu memengaruhi ruang di sekitar konten elemen.
+
+4. Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+    Perbedaan utama antara Tailwind dan Bootstrap adalah pendekatannya terhadap CSS. Bootstrap adalah framework CSS berbasis komponen, yang berarti menyediakan kumpulan komponen siap pakai yang dapat Anda gunakan untuk membangun situs web dan aplikasi web. Tailwind, di sisi lain, adalah framework CSS berbasis utilitas, yang berarti menyediakan kumpulan kelas utilitas yang dapat Anda gunakan untuk menyesuaikan tampilan dan nuansa situs web Anda.
+
+    Bootstrap
+    Waktu yang tepat untuk menggunakan bootstrap adalah saat ingin mengembangkan proyek dengan cepat dan tidak memiliki banyak waktu untuk merancang tampilan dari awal, karena komponen UI yang telah ditentukan sebelumnya dan desainnya yang konsisten. Sehingga, tidak perlu lagi memakan banyak waktu mengotak atik CSS kustom.
+
+    Tailwind
+    Waktu yang tepat untuk menggunakan tailwind  adalah saat kita ingin memiliki fleksibilitas tinggi dalam merancang tampilan sesuai dengan kebutuhan proyek, karena Tailwind memungkinkan kita untuk merancang tampilan dengan menggunakan kelas-kelas utilitas. Sehingga,ukuran file CSS kita juga akan berkurang untuk meningkatkan kecepatan muat halaman.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    1. Halaman Login
+        Pertama, saya mengubah latar belakang header card menjadi warna biru (.bg-primary) dan teks menjadi putih (.text-white). Tombol "Login" juga menjadi warna biru (btn-primary). Negitu juga pada teks register now.
+    2. Halaman register
+        Pertama, saya menggunakan container dan row Bootstrap untuk mengatur tata letak keseluruhan. Lalu, agar lebih rapi saya ,menggunakan card Bootstrap untuk mengelilingi formulir pendaftaran. Agar lebih berwarna, saya memberikan header card dengan latar belakang biru (bg-primary) dan teks putih (text-white). Dan memberi warna tombol "Daftar" dengan kelas btn btn-primary.
+    3. halaman Utama
+        Pertama saya membuat navbar dengan lataer belakang biru dan tomobol logout merah dan tulisan Judul Wahyus Shop Page Putih denga kode berikut.
+          <a class="navbar-brand" href="#" style="color: white;">Wahyus Shop Page</a>
+        Lalu untuk tombol logoutnya saya tambahkan class="btn btn-danger" untuk memberi warna merah 
+            <button class="btn btn-danger">
+                      Logout
+                  </button>
+        Dan untuk table agar memiliki bordr dan isi lebih berwarna saya menambahkan kode berikut
+            <table class="table table-bordered table-striped bg-light">
+
+    4. Halaman Add New Product    
+        Agar halaman lebih berwarna, saya memberi warna header card biru dengan kode berikut
+         <div class="card-header bg-primary text-white">
+            <h1 class="card-title">Add New Product</h1>
+        </div> 
+        Lalu saya menaruh formulir di card agar lebih rapi
+             <div class="card-body"></div>
+        dan memberi margin agar lebih tertata
+            <table style="margin: 20px;">
+
