@@ -46,44 +46,49 @@ Tugas 6
      - AJAX GET
 
         Ubahlah kode cards data item agar dapat mendukung AJAX GET.
-
-        Lakukan pengambilan task menggunakan AJAX GET.
+            Kita perlu membuat fungsi pada views yaitu get_product_json yang menerima parameter request. untuk mengembalikan data JSON. Fungsi ini akan digunakan untuk menampilkan data produk pada HTML dengan menggunakan fetch
 
      - AJAX POST
 
         1. Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan item.
 
-        Pertama, kita perlu membuat fungsi baru pada block 
-        <Script> dengan nama addProduct()
+            Pertama, kita perlu membuat fungsi baru pada block dengan nama addProduct().
+            Fungsi tersebut digunakan untuk membuat sebuah FormData baru yang datanya diambil dari form pada modal sehingga data dapat dikirimkan dari form tersebut ke server. Lalu, document.getElementById("form").reset() digunakan untuk mengosongkan isi field form modal setelah di-submit. Agar dapat menambahkan product, kita juga perplu menambahkan tombol sebagai berikut:
+            
+            document.getElementById("button_add").onclick = addProduct
 
-        <script>
+        2. Buatlah fungsi view baru untuk menambahkan item baru ke dalam basis data.
+
+            Agar kita dapat menambahkan item baru, maka kita perlu membuat sebuah fungsi dengan nama add_product_ajax yang menerima parameter request. Dengan fungsi tersebut kita dapat mengambil value name pada request, begitu juga membuat objek Product baru dengan parameter sesuai values dari request.
+
+        3. Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat.
+
+            Setelah berhaisl membuat funsgi pada views, selanjutnya kita perlu mengimpor fungsi tersebut pada urls.py. Lalu kita tambahkan path url dari kedua fungsi ke dalam urlpatterns.
+
+            path('get-product/', get_product_json, name='get_product_json'),
+            path('create-ajax/', add_product_ajax, name='add_product_ajax')
+
+        4. Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/.
+
+            Untuk menambahkan path kita perlu menambahkan kode fetch("{% url 'main:add_product_ajax' %}", pada fungsi addPRoduct
+
             function addProduct() {
                 fetch("{% url 'main:add_product_ajax' %}", {
                     method: "POST",
                     body: new FormData(document.querySelector('#form'))
                 }).then(refreshProducts)
-
                 document.getElementById("form").reset()
                 return false
             }
-        </script>
-        
-        Kode tersebut digunakan untuk membuat sebuah FormData baru yang datanya diambil dari form pada modal sehingga data dapat dikirimkan dari form tersebut ke server. Lalu, document.getElementById("form").reset() digunakan untuk mengosongkan isi field form modal setelah di-submit. Agar dapat menambahkan product, kita juga perplu menambahkan tombol sebagai berikut:
-        
-        <script>
-        ...
-        document.getElementById("button_add").onclick = addProduct
-        </script>
-
-        2. Buatlah fungsi view baru untuk menambahkan item baru ke dalam basis data.
-
-        3. Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat.
-
-        4. Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/.
-
+            
         5. Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar item terbaru tanpa reload halaman utama secara keseluruhan.
+            Kita perlu membuat fungsi baru dengan nama refreshProducts() yang digunakan untuk me-refresh data produk secara asynchronous. Lalu memanggil fungsi tersebut yaitu refreshProducts() pada setiap kali membuka halaman web.
 
     Checklist 2. Melakukan perintah collectstatic.
+        PErintah tersebut dapat dilakukan hanya dengan mengetik berikut pada command line:
+        python manage.py collectstatic
+        Maka file static akan tersimpan pada direktoti yang sudah ditentukan.
+
 
 
 Referensi:
