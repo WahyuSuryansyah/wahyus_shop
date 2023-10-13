@@ -3,7 +3,7 @@ NPM  : 2206083142
 Kelas: PBP E
 Kode Asdos: LKS
 
-Link: 
+Link: mochammad-wahyu21-tugas.pbp.cs.ui.ac.id
 
 Tugas 6
 
