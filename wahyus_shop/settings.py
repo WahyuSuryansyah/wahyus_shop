@@ -16,6 +16,9 @@ import os # Tambahkan kode berikut
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env() # Tambahkan kode berikut
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-ih!0rb^f@(&!=cg_*(el57$7yp(r#u*8_b4y0f^2b7a*i7xjg('
-
+PRODUCTION = env.bool('PRODUCTION', False)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -82,6 +85,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# Set database settings automatically using DATABASE_URL.
+if PRODUCTION:
+    DATABASES = {
+        'default': env.db('DATABASE_URL')
+    }
+    DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 # Password validation
