@@ -20,6 +20,8 @@ env = environ.Env() # Tambahkan kode berikut
 
 
 
+CSRF_TRUSTED_ORIGINS = ['http://mochammad-wahyu21-tugas.pbp.cs.ui.ac.id', 
+                                'https://mochammad-wahyu21-tugas.pbp.cs.ui.ac.id']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
