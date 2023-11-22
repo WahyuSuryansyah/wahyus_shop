@@ -41,6 +41,7 @@ def create_product_flutter(request):
             user = request.user,
             name = data["name"],
             price = int(data["price"]),
+            amount = int(data["amount"]),
             description = data["description"]
         )
 
@@ -146,9 +147,10 @@ def add_product_ajax(request):
         name = request.POST.get("name")
         description = request.POST.get("description")
         amount = request.POST.get("amount")
+        price = request.POST.get("price")
         user = request.user
 
-        new_product = Product(name=name, description=description, amount=amount, user=user)
+        new_product = Product(name=name, description=description, amount=amount, user=user, price=price)
         new_product.save()
 
         return HttpResponse(b"CREATED", status=201)
