@@ -18,7 +18,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 
-
 @login_required(login_url='/login')
 def show_main(request):
     products = Product.objects.filter(user=request.user)
